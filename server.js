@@ -12,3 +12,5 @@ app.listen(PORT||5000,()=>{
     console.log(`server is running at http://localhost:${PORT}`);
 });
 
+app.use(morgan('dev'));
+app.use(express.json());
