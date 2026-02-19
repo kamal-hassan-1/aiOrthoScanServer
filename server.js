@@ -1,6 +1,7 @@
 import express from "express"
 import morgan from "morgan"
 import dotenv from "dotenv"
+import routes from "./Routes"
 dotenv.config()
 
 const PORT=process.env.PORT||5000;
@@ -14,3 +15,5 @@ app.listen(PORT||5000,()=>{
 
 app.use(morgan('dev'));
 app.use(express.json());
+
+app.use("/api",routes);
