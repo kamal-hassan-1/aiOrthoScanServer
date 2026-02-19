@@ -1,8 +1,9 @@
 import express from "express"
-import controllerFunction from "../../Controllers"
+import {handleSignup} from "../../Controllers/auth/signup.controller.js"
+
 const router = express.Router();
 
 
-router.post("/signup/", controllerFunction)
+router.get("/signup", handleSignup)
 
-module.exports=router;
+export default router;
