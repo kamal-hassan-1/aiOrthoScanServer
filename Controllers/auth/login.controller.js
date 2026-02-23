@@ -1,12 +1,12 @@
-import {signupService} from "../../Services/auth/signup.service.js"
+import {loginService} from "../../Services/auth/login.service.js"
 
-export const handleSignup= async (req, res)=> {
+export const handleLogin= async (req, res)=> {
     try{
         console.log(req.body);
         
-        const user= await signupService(req.body);
+        const user= await loginService(req.body);
         console.log(user)
-        res.status(201).json({
+        res.status(200).json({
             success: true,
             data: user
         })
