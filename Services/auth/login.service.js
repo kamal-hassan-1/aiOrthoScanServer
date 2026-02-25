@@ -1,5 +1,8 @@
 import User from "../../Models/user.js";
 import bcrypt from "bcrypt";
+import dotenv from "dotenv";
+import jsonwebtoken from "jsonwebtoken";
+dotenv.config();
 
 export const loginService = async (userData) => {
   const user = await User.findOne({ email: userData.email });
@@ -13,7 +16,14 @@ export const loginService = async (userData) => {
   if (!isMatch) {
     throw new Error("Wrong Password");
   }
-  const {password,...userwithoutpassword}=user._doc;
-  return userwithoutpassword;
+  const userObj=user.toObject();
+  const token=jsonwebtoken.sign({id:userObj._id,name:userObj.fullName},
+                                process.env.ACCESS_TOKEN_SECRET_KEY);
+
+  delete userObj.password;
+  return {
+    userObj,
+    token
+  };
 
 };
