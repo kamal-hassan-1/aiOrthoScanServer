@@ -17,7 +17,7 @@ export const loginService = async (userData) => {
     throw new Error("Wrong Password");
   }
   const userObj=user.toObject();
-  const token=jsonwebtoken.sign({id:userObj._id,name:userObj.fullName},
+  const token=jsonwebtoken.sign({_id:userObj._id,fullName:userObj.fullName},
                                 process.env.ACCESS_TOKEN_SECRET_KEY);
 
   delete userObj.password;
